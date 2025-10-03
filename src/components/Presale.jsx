@@ -5,7 +5,6 @@ import { useAccount, useBalance, useWalletClient } from "wagmi";
 import { getContract, parseEther } from "viem";
 import { ConnectButton } from "@rainbow-me/rainbowkit";
 import toast from "react-hot-toast";
-import PresaleABI from "../../../smart-contract/contracts/Presale_contract.json";
 
 const PRESALE_ABI = [
   "function buy() external payable",
