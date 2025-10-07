@@ -118,7 +118,12 @@ export default function Presale() {
           <div className="flex flex-col md:flex-row justify-between items-start gap-6">
             <div>
               <h1 className="text-3xl md:text-4xl lg:text-5xl font-extrabold tracking-tight">
-                9BNB �{" "}
+                9BNB 
+                <img 
+                  src="/sheelsheep.jpg" 
+                  alt="9BNB" 
+                  className="inline-block h-8 md:h-10 lg:h-12 w-auto object-contain mx-3"
+                />
                 <span className="ml-2 text-xl md:text-2xl font-bold">
                   Presale
                 </span>
@@ -165,7 +170,7 @@ export default function Presale() {
             <div className="flex flex-row items-start gap-6">
               <div className="w-20 h-20 md:w-24 md:h-24 rounded-xl bg-[#FFF6EA] flex items-center justify-center border shadow-inner">
                 <img
-                  src="/logo.jpeg"
+                  src="/sheelsheep.jpg"
                   alt="9BNB logo"
                   className="w-14 h-14 object-cover rounded-md"
                 />
