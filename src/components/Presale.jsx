@@ -128,7 +128,7 @@ export default function Presale() {
                   Presale
                 </span>
               </h1>
-              <p className="text-xs md:text-sm text-[#030303] mt-2">
+              <p className="text-xs md:text-sm text-[#7D857F] mt-2">
                 Min 0.05 BNB • Max 0.1 BNB • Target {target} BNB
                 {!presaleActive && <span className="text-red-600 font-semibold ml-2">• INACTIVE</span>}
                 {paused && <span className="text-yellow-600 font-semibold ml-2">• PAUSED</span>}
@@ -232,10 +232,8 @@ export default function Presale() {
                 ))}
               </div>
             </div>
-
             {/* Tip */}
             <p className="mt-4 text-xs text-[#9B9B9B] italic">
-              Tip: Max = 0.1, Min = 0.05 (remaining to {target} BNB). Purchases below 0.05 are rejected. 
               {isConnected && !isWhitelisted && (
                 <span className="text-red-600 font-semibold"> Your wallet must be whitelisted to participate.</span>
               )}
