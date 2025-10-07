@@ -1,13 +1,50 @@
-# React + Vite
+# 9BNB - Presale Platform
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+9BNB is a secure token presale platform with whitelist functionality built on React and Vite.
 
-Currently, two official plugins are available:
+## Features
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- 🔐 **Whitelist-based presale** - Only approved addresses can participate
+- 💰 **BNB payments** - Accept payments in BNB with automatic conversion
+- 📊 **Real-time stats** - Live tracking of presale progress and contributions
+- 🛡️ **Security first** - Built-in validation and error handling
+- 🎯 **Contribution limits** - Min 0.05 BNB, Max 0.1 BNB per wallet
+- 🚀 **Modern UI** - Beautiful, responsive interface with TailwindCSS
 
-## Expanding the ESLint configuration
+## Getting Started
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
-# Sheel
+### Prerequisites
+- Node.js 18+ 
+- MetaMask or compatible wallet
+- Sepolia testnet ETH for testing
+
+### Installation
+```bash
+npm install
+```
+
+### Environment Setup
+Create a `.env` file:
+```
+VITE_PRESALE_ADDRESS=0xYourContractAddress
+VITE_RPC_URL=https://sepolia.your_rpc_provider.io
+```
+
+### Development
+```bash
+npm run dev
+```
+
+### Testing Contract
+```bash
+npm run smoke
+```
+
+## Tech Stack
+
+- **Frontend**: React 19, Vite, TailwindCSS
+- **Web3**: Wagmi, Viem, RainbowKit
+- **UI**: React Hot Toast, React Icons
+- **Blockchain**: Ethereum Sepolia testnet
+
+Built with ❤️ by the 9BNB Team
