@@ -88,31 +88,31 @@ export default function Presale() {
 
   return (
     <div className="min-h-screen flex flex-col bg-[#FAF3E0] w-full text-[#0B2436]">
-      {/* Header */}
-      <header className="w-full flex justify-center pt-6 px-4">
-        <div className="w-full max-w-7xl rounded-2xl border-4 border-black px-6 py-3 flex items-center justify-between bg-transparent">
-          <h1 className="text-orange-400 text-2xl md:text-3xl font-extrabold tracking-wide">
-            SHEEL TOKEN
-          </h1>
+     { /* Header */}
+        <header className="w-full flex justify-center pt-6 px-4">
+          <div className="w-full max-w-7xl rounded-2xl border-4 border-black px-6 py-3 flex items-center justify-between bg-transparent">
+            <a href="https://www.sheel.fun" className="text-orange-400 text-2xl md:text-3xl font-extrabold tracking-wide hover:text-orange-500 transition">
+          Home
+            </a>
 
-          <div className="flex items-center gap-3">
-            <button
-              aria-label="telegram"
-              className="h-10 w-10 flex items-center justify-center rounded-full border border-orange-400 bg-[#FFF6EA] hover:scale-110 transition"
-            >
-              <FaTelegramPlane className="text-orange-400" />
-            </button>
-            <button
-              aria-label="twitter"
-              className="h-10 w-10 flex items-center justify-center rounded-full border border-orange-400 bg-orange-400 hover:scale-110 transition"
-            >
-              <FaTwitter className="text-[#FFF6EA]" />
-            </button>
+            <div className="flex items-center gap-3">
+          <button
+            aria-label="telegram"
+            className="h-10 w-10 flex items-center justify-center rounded-full border border-orange-400 bg-[#FFF6EA] hover:scale-110 transition"
+          >
+            <FaTelegramPlane className="text-orange-400" />
+          </button>
+          <button
+            aria-label="twitter" 
+            className="h-10 w-10 flex items-center justify-center rounded-full border border-orange-400 bg-orange-400 hover:scale-110 transition"
+          >
+            <FaTwitter className="text-[#FFF6EA]" />
+          </button>
+            </div>
           </div>
-        </div>
-      </header>
+        </header>
 
-      {/* Title & Wallet */}
+        {/* Title & Wallet */}
       <section className="w-full flex justify-center mt-8 px-4">
         <div className="max-w-5xl w-full">
           <div className="flex flex-col md:flex-row justify-between items-start gap-6">
