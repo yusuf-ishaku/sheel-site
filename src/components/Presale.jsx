@@ -128,7 +128,7 @@ export default function Presale() {
                   Presale
                 </span>
               </h1>
-              <p className="text-xs md:text-sm text-[#7D857F] mt-2">
+              <p className="text-xs md:text-sm text-[#030303] mt-2">
                 Min 0.05 BNB • Max 0.1 BNB • Target {target} BNB
                 {!presaleActive && <span className="text-red-600 font-semibold ml-2">• INACTIVE</span>}
                 {paused && <span className="text-yellow-600 font-semibold ml-2">• PAUSED</span>}
