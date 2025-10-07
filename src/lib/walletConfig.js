@@ -1,17 +1,17 @@
 import { http } from "wagmi";
-import { mainnet, bsc } from "wagmi/chains";
+import { mainnet, bsc, sepolia } from "wagmi/chains";
 import { createClient } from "viem";
 import { getDefaultConfig } from "@rainbow-me/rainbowkit";
-const projectId = "05ea4a9903233202a47d6c2c6e8643af";
+
+const projectId = "74ca59a446dd3f63262458b5d9426ebb";
 
 // export default config
-
 const newConfig = getDefaultConfig({
   appName: "Sheel",
   projectId,
-  chains: [mainnet, bsc],
+  chains: [mainnet, bsc, sepolia],
   client({ chain }) {
-    return createClient({ chain, transport: http() });
+    return createClient({ chain, transport: http()});
   },
 });
 

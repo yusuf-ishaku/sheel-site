@@ -1,33 +1,55 @@
 "use client";
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { FaTelegramPlane, FaTwitter } from "react-icons/fa";
-import { useAccount, useBalance, useWalletClient } from "wagmi";
-import { getContract, parseEther } from "viem";
+import { useAccount, useBalance } from "wagmi";
+import usePresaleContract from '../hooks/usePresaleContract'
 import { ConnectButton } from "@rainbow-me/rainbowkit";
 import toast from "react-hot-toast";
-
-const PRESALE_ABI = [
-  "function buy() external payable",
-  "function raised() view returns (uint256)",
-  "function target() view returns (uint256)",
-];
-const PRESALE_ADDRESS = "0xYourContractAddressHere";
 
 export default function Presale() {
   const { address, isConnected } = useAccount();
   const { data: balance } = useBalance({ address });
-  const client = useWalletClient();
+  const { 
+    raised, 
+    target, 
+    loading, 
+    buy,
+    isWhitelisted,
+    userContributions,
+    presaleActive,
+    soldOut,
+    paused
+  } = usePresaleContract()
 
   const [amount, setAmount] = useState("");
-  const [loading, setLoading] = useState(false);
-  const [raised, setRaised] = useState(0);
-  const [target, setTarget] = useState(20);
+  // loading provided by hook
+
+  // on-chain reads are handled in usePresaleContract hook
 
   const handleBuy = async () => {
     if (!isConnected) {
       toast.error("⚠️ Please connect your wallet first");
       return;
     }
+
+    // Check presale status first
+    if (!presaleActive) {
+      toast.error("⚠️ Presale is not currently active");
+      return;
+    }
+    if (soldOut) {
+      toast.error("⚠️ Presale has sold out");
+      return;
+    }
+    if (paused) {
+      toast.error("⚠️ Presale is currently paused");
+      return;
+    }
+    if (!isWhitelisted) {
+      toast.error("⚠️ Your wallet is not whitelisted for this presale");
+      return;
+    }
+
     if (!amount || Number(amount) <= 0) {
       toast.error("⚠️ Enter a valid amount");
       return;
@@ -42,66 +64,27 @@ export default function Presale() {
       toast.error("⚠️ Maximum contribution is 0.1 BNB");
       return;
     }
+    if (userContributions + amt > 0.1) {
+      toast.error(`⚠️ Maximum 0.1 BNB per wallet. You have already contributed ${userContributions.toFixed(4)} BNB`);
+      return;
+    }
 
     try {
-      setLoading(true);
       toast.loading("⏳ Processing... confirm in wallet", { id: "tx" });
 
-      const presale = getContract({
-        abi: PRESALE_ABI,
-        address: PRESALE_ADDRESS,
-        client: client.data,
-      });
+      await buy(amount)
 
-     const txHash = await presale.write.buy([address], {
-       value: parseEther(amount),
-       account: address,
-     });
+      toast.loading("\u23f3 Waiting for confirmation...", { id: "tx" });
 
-      toast.loading("⏳ Waiting for confirmation...", { id: "tx" });
-
-      await client.data.waitForTransactionReceipt({ hash: txHash });
-
+      // buy() inside hook waits for receipt and refreshes
       toast.success("🎉 Purchase successful!", { id: "tx" });
       setAmount("");
-
-      // Refresh stats
-      const res = await fetch("http://localhost:5000/api/presale/stats");
-      const data = await res.json();
-      setRaised(parseFloat(data.raised));
-      setTarget(parseFloat(data.target));
     } catch (err) {
       console.error(err);
-      toast.error(
-        "❌ " + (err?.reason || err?.message || "Transaction failed"),
-        {
-          id: "tx",
-        }
-      );
-    } finally {
-      setLoading(false);
+      toast.error("❌ " + (err?.reason || err?.message || "Transaction failed"), { id: "tx" });
     }
   };
-
-  // fetch stats
-  // useEffect(() => {
-  //   const fetchStats = async () => {
-  //     try {
-  //       const res = await fetch("http://localhost:5000/api/stats");
-  //       const data = await res.json();
-  //       setRaised(parseFloat(data.raised));
-  //       setTarget(parseFloat(data.target));
-  //     } catch (err) {
-  //       console.error("Failed to fetch stats", err);
-  //     }
-  //   };
-  //   fetchStats();
-  // }, []);
-
-  const progressPercent = Math.min(
-    100,
-    target > 0 ? (raised / target) * 100 : 0
-  );
+  const progressPercent = Math.min(100, target > 0 ? (raised / target) * 100 : 0);
 
   return (
     <div className="min-h-screen flex flex-col bg-[#FAF3E0] w-full text-[#0B2436]">
@@ -141,7 +124,10 @@ export default function Presale() {
                 </span>
               </h1>
               <p className="text-xs md:text-sm text-[#7D857F] mt-2">
-                Min 0.05 BNB • Max 0.1 BNB • Target 20 BNB
+                Min 0.05 BNB • Max 0.1 BNB • Target {target} BNB
+                {!presaleActive && <span className="text-red-600 font-semibold ml-2">• INACTIVE</span>}
+                {paused && <span className="text-yellow-600 font-semibold ml-2">• PAUSED</span>}
+                {soldOut && <span className="text-red-600 font-semibold ml-2">• SOLD OUT</span>}
               </p>
             </div>
 
@@ -149,9 +135,21 @@ export default function Presale() {
               <ConnectButton />
               <div className="text-left sm:text-right">
                 {isConnected && (
-                  <p className="text-xs text-[#6A6A6A]">
-                    Bal: {balance?.format ?? "0.00"} {balance?.symbol ?? ""}
-                  </p>
+                  <>
+                    <p className="text-xs text-[#6A6A6A]">
+                      Bal: {balance?.format ?? "0.00"} {balance?.symbol ?? ""}
+                    </p>
+                    <p className="text-xs mt-1">
+                      <span className={`font-semibold ${isWhitelisted ? 'text-green-600' : 'text-red-600'}`}>
+                        {isWhitelisted ? '✅ Whitelisted' : '❌ Not Whitelisted'}
+                      </span>
+                    </p>
+                    {userContributions > 0 && (
+                      <p className="text-xs text-[#6A6A6A] mt-1">
+                        Contributed: {userContributions.toFixed(4)} BNB
+                      </p>
+                    )}
+                  </>
                 )}
               </div>
             </div>
@@ -204,11 +202,16 @@ export default function Presale() {
                   onChange={(e) => setAmount(e.target.value)}
                 />
                 <button
-                  onClick={handleBuy} // 🔥 directly call this one
-                  disabled={!isConnected || loading}
+                  onClick={handleBuy}
+                  disabled={!isConnected || loading || !presaleActive || soldOut || paused || !isWhitelisted}
                   className="px-6 md:px-10 h-12 rounded-lg bg-[#0E1A2F] text-white font-bold hover:bg-[#152437] disabled:opacity-50"
                 >
-                  {loading ? "..." : "BUY"}
+                  {loading ? "..." : 
+                   !isConnected ? "CONNECT WALLET" :
+                   !isWhitelisted ? "NOT WHITELISTED" :
+                   !presaleActive ? "PRESALE INACTIVE" :
+                   paused ? "PRESALE PAUSED" :
+                   soldOut ? "SOLD OUT" : "BUY"}
                 </button>
               </div>
 
@@ -227,8 +230,10 @@ export default function Presale() {
 
             {/* Tip */}
             <p className="mt-4 text-xs text-[#9B9B9B] italic">
-              Tip: Max = min(0.1, remaining to 20 BNB). Purchases below 0.05 are
-              rejected.
+              Tip: Max = min(0.1, remaining to {target} BNB). Purchases below 0.05 are rejected. 
+              {isConnected && !isWhitelisted && (
+                <span className="text-red-600 font-semibold"> Your wallet must be whitelisted to participate.</span>
+              )}
             </p>
           </div>
         </div>
