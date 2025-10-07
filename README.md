@@ -1,6 +1,18 @@
-# Sheel Sheep Presale Platform
+# Sheel Token Presale Platform
 
-Sheel Sheep is a secure token presale platform with whitelist functionality built on React and Vite.
+Sheel Token is a secure token presale platform with whitelist functionality built on React and Vite.
+
+## Features
+
+- 🔐 **Whitelist-based presale** - Only approved addresses can participate
+- 💰 **BNB payments** - Accept payments in BNB with automatic conversion
+- 📊 **Real-time stats** - Live tracking of presale progress and contributions
+- 🛡️ **Security first** - Built-in validation and error handling
+- � **Contribution limits** - Min 0.05 BNB, Max 0.1 BNB per wallet
+- 🪙 **Sheel Token theme** - Beautiful token-themed interface with TailwindCSS🎯 **Contribution limits** - Min 0.05 BNB, Max 0.1 BNB per wallet
+- 🪙 **Sheel Token theme** - Beautiful token-themed interface with TailwindCSS 🪙 **Sheel Token theme** - Beautiful token-themed interface with TailwindCSSn Presale Platform
+
+Sheel Token is a secure token presale platform with whitelist functionality built on React and Vite.
 
 ## Features
 
@@ -47,4 +59,4 @@ npm run smoke
 - **UI**: React Hot Toast, React Icons
 - **Blockchain**: Ethereum Sepolia testnet
 
-Built with ❤️ by the Sheel Sheep Team
+Built with ❤️ by the Sheel Token Team
