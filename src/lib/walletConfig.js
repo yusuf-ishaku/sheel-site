@@ -7,7 +7,7 @@ const projectId = "74ca59a446dd3f63262458b5d9426ebb";
 
 // export default config
 const newConfig = getDefaultConfig({
-  appName: "9BNB",
+  appName: "Sheel Sheep",
   projectId,
   chains: [mainnet, bsc, sepolia],
   client({ chain }) {

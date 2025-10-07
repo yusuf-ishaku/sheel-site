@@ -1,6 +1,6 @@
-# 9BNB - Presale Platform
+# Sheel Sheep Presale Platform
 
-9BNB is a secure token presale platform with whitelist functionality built on React and Vite.
+Sheel Sheep is a secure token presale platform with whitelist functionality built on React and Vite.
 
 ## Features
 
@@ -9,7 +9,7 @@
 - 📊 **Real-time stats** - Live tracking of presale progress and contributions
 - 🛡️ **Security first** - Built-in validation and error handling
 - 🎯 **Contribution limits** - Min 0.05 BNB, Max 0.1 BNB per wallet
-- 🚀 **Modern UI** - Beautiful, responsive interface with TailwindCSS
+- � **Sheel Sheep theme** - Beautiful sheep-themed interface with TailwindCSS
 
 ## Getting Started
 
@@ -47,4 +47,4 @@ npm run smoke
 - **UI**: React Hot Toast, React Icons
 - **Blockchain**: Ethereum Sepolia testnet
 
-Built with ❤️ by the 9BNB Team
+Built with ❤️ by the Sheel Sheep Team

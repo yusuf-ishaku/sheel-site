@@ -92,7 +92,7 @@ export default function Presale() {
       <header className="w-full flex justify-center pt-6 px-4">
         <div className="w-full max-w-7xl rounded-2xl border-4 border-black px-6 py-3 flex items-center justify-between bg-transparent">
           <h1 className="text-orange-400 text-2xl md:text-3xl font-extrabold tracking-wide">
-            9BNB
+            SHEEL SHEEP
           </h1>
 
           <div className="flex items-center gap-3">
@@ -118,10 +118,10 @@ export default function Presale() {
           <div className="flex flex-col md:flex-row justify-between items-start gap-6">
             <div>
               <h1 className="text-3xl md:text-4xl lg:text-5xl font-extrabold tracking-tight">
-                9BNB 
+                SHEEL SHEEP 
                 <img 
                   src="/sheelsheep.jpg" 
-                  alt="9BNB" 
+                  alt="Sheel Sheep" 
                   className="inline-block h-8 md:h-10 lg:h-12 w-auto object-contain mx-3"
                 />
                 <span className="ml-2 text-xl md:text-2xl font-bold">
@@ -171,7 +171,7 @@ export default function Presale() {
               <div className="w-20 h-20 md:w-24 md:h-24 rounded-xl bg-[#FFF6EA] flex items-center justify-center border shadow-inner">
                 <img
                   src="/sheelsheep.jpg"
-                  alt="9BNB logo"
+                  alt="Sheel Sheep logo"
                   className="w-14 h-14 object-cover rounded-md"
                 />
               </div>
@@ -235,7 +235,7 @@ export default function Presale() {
 
             {/* Tip */}
             <p className="mt-4 text-xs text-[#9B9B9B] italic">
-              Tip: Max = min(0.1, remaining to {target} BNB). Purchases below 0.05 are rejected. 
+              Tip: Max = 0.1, Min = 0.05 (remaining to {target} BNB). Purchases below 0.05 are rejected. 
               {isConnected && !isWhitelisted && (
                 <span className="text-red-600 font-semibold"> Your wallet must be whitelisted to participate.</span>
               )}
@@ -246,7 +246,7 @@ export default function Presale() {
 
       {/* Footer */}
       <footer className="py-8 text-center">
-        <p className="text-orange-400 font-semibold italic">9BNB 2025</p>
+        <p className="text-orange-400 font-semibold italic">SHEEL TOKEN 2025</p>
       </footer>
     </div>
   );
